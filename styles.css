@@ -8,7 +8,7 @@
 body {
     font-family: 'Noto Sans SC', sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: #f0f0f0; /* 全局默认文本颜色改为浅色，以适应视频背景 */
     overflow-x: hidden;
 }
 
@@ -66,7 +66,7 @@ body {
 
 .nav-link {
     text-decoration: none;
-    color: #333;
+    color: #333; /* 导航栏背景是浅色，所以链接颜色保持深色 */
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
@@ -100,13 +100,48 @@ body {
 .bar {
     width: 25px;
     height: 3px;
-    background: #333;
+    background: #333; /* 汉堡菜单线条颜色，导航栏背景浅色，保持深色 */
     margin: 3px 0;
     transition: 0.3s;
 }
 
 /* 主页横幅 */
+#fixed-video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1; /* 确保视频在最底层 */
+}
+
 .hero {
+    height: 100vh; /* 保持 hero 区域占满视口高度 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* 确保 hero-content 可以相对于它定位 */
+    color: white; /* 确保文字在视频上可见 */
+    /* overflow: hidden; /* 如果 hero 内容可能超出，则保留 */
+}
+
+.hero-content {
+    position: relative; /* 内容在视频之上 */
+    z-index: 1; /* 确保在视频之上，高于 #fixed-video-bg 的 z-index */
+    text-align: center;
+    /* background-color: rgba(0, 0, 0, 0.3); /* 可选：为文字添加半透明背景以增强可读性 */
+    /* padding: 20px; */
+    /* border-radius: 10px; */
+}
+
+/* 移除之前针对 .video-hero 和 #hero-video-bg 的特定样式，因为视频现在是全局固定的 */
+/* .video-hero { ... } */
+/* #hero-video-bg { ... } */
+
+/* 原始 hero 样式调整，如果需要保留渐变背景作为备用，但当前是视频背景 */
+/*
+.hero:not(.video-hero) {
     height: 100vh;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     display: flex;
@@ -115,11 +150,12 @@ body {
     position: relative;
     overflow: hidden;
 }
+*/
 
 .hero-content {
     text-align: center;
     color: white;
-    z-index: 2;
+    z-index: 1; /* 调整 z-index，因为视频背景在 z-index: 0 */
     max-width: 800px;
     padding: 0 20px;
 }
@@ -292,7 +328,7 @@ section {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 3rem;
-    color: #2c3e50;
+    color: white; /* Section 标题颜色改为白色 */
     position: relative;
 }
 
@@ -310,7 +346,23 @@ section {
 
 /* 关于我们部分 */
 .about {
-    background: #f8f9fa;
+    background: transparent;
+    color: white; /* 确保文本在视频上可见 */
+}
+
+.about .section-title,
+.about .about-text h3,
+.about .about-text h4,
+.about .stat-label {
+    color: white; /* 调整标题和标签颜色 */
+}
+
+.about .about-text p {
+    color: #f0f0f0; /* 调整段落文本颜色 */
+}
+
+.about .stat-number {
+    color: #87ceeb; /* 调整数字颜色，浅蓝色 */
 }
 
 .about-content {
@@ -323,7 +375,7 @@ section {
 .about-text p {
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
-    color: #555;
+    color: #f0f0f0; /* about 部分段落文本颜色调整 */
     line-height: 1.8;
 }
 
@@ -346,7 +398,7 @@ section {
 
 .stat-label {
     font-size: 1rem;
-    color: #666;
+    color: #f0f0f0; /* about 部分统计标签颜色调整 */
 }
 
 .about-image img {
@@ -358,6 +410,21 @@ section {
 /* 研究方向 */
 .research {
     background: white;
+    color: #333; /* 恢复默认深色文本 */
+}
+
+.research .section-title,
+.research .research-card h3 {
+    color: #2c3e50; /* 标题颜色恢复为深色 */
+}
+
+.research .research-card p {
+    color: #666; /* 段落文本颜色恢复为深灰色 */
+}
+
+.research-card {
+    background: white; /* 卡片背景恢复为白色 */
+    border: 1px solid #f0f0f0; /* 卡片边框 */
 }
 
 .research-grid {
@@ -398,17 +465,42 @@ section {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 15px;
-    color: #2c3e50;
+    color: white; /* research card 标题颜色调整 */
 }
 
 .research-card p {
-    color: #666;
+    color: #f0f0f0; /* research card 段落文本颜色调整 */
     line-height: 1.6;
 }
 
 /* 团队成员 */
 .team {
-    background: #f8f9fa;
+    background: white;
+    color: #333; /* 恢复默认深色文本 */
+}
+
+.team .section-title,
+.team .team-subtitle,
+.team .member-info h4 {
+    color: #2c3e50; /* 标题和成员姓名颜色恢复为深色 */
+}
+
+.team .member-title,
+.team .member-year {
+    color: #4a90e2; /* 成员职称和年份颜色恢复为蓝色 */
+}
+
+.team .member-description,
+.team .research-focus,
+.team .member-contact,
+.team .member-contact a {
+    color: #666; /* 描述和联系方式颜色恢复为深灰色 */
+}
+
+.supervisor-card,
+.member-card {
+    background: white; /* 卡片背景恢复为白色 */
+    border: 1px solid #f0f0f0; /* 卡片边框 */
 }
 
 .team-section {
@@ -418,7 +510,7 @@ section {
 .team-subtitle {
     font-size: 1.8rem;
     font-weight: 600;
-    color: #2c3e50;
+    color: white; /* team 部分副标题颜色调整 */
     margin-bottom: 30px;
     text-align: center;
 }
@@ -471,36 +563,67 @@ section {
 .member-info h4 {
     font-size: 1.3rem;
     font-weight: 600;
-    color: #2c3e50;
+    color: white; /* team member 卡片标题颜色调整 */
     margin-bottom: 10px;
 }
 
 .member-title,
 .member-year {
-    color: #4a90e2;
+    color: #87ceeb; /* team member 职称和年份颜色调整为更亮的浅蓝色 */
     font-weight: 500;
     margin-bottom: 10px;
 }
 
 .member-description {
-    color: #666;
+    color: #f0f0f0; /* team member 描述文本颜色调整 */
     line-height: 1.6;
     margin-bottom: 15px;
 }
 
 .research-focus {
-    color: #666;
+    color: #f0f0f0; /* team member 研究方向文本颜色调整 */
     font-style: italic;
 }
 
 .member-contact {
-    color: #666;
+    color: #f0f0f0; /* team member 联系方式文本颜色调整 */
     font-size: 0.9rem;
 }
 
 /* 学术成果 */
 .publications {
     background: white;
+    color: #333; /* 恢复默认深色文本 */
+}
+
+.publications .section-title,
+.publications .pub-content h4 {
+    color: #2c3e50; /* 标题颜色恢复为深色 */
+}
+
+.publications .pub-authors,
+.publications .pub-journal {
+    color: #666; /* 作者和期刊信息颜色恢复为深灰色 */
+}
+
+.publications .pub-year {
+    color: #4a90e2; /* 年份颜色恢复为蓝色 */
+}
+
+.publication-item {
+    background: #f8f9fa; /* 列表项背景恢复为浅灰色 */
+    border-left: 4px solid #4a90e2; /* 列表项左边框恢复为蓝色 */
+}
+
+.category-btn {
+    border: 2px solid #4a90e2; /* 类别按钮边框恢复为蓝色 */
+    color: #4a90e2; /* 类别按钮文字颜色恢复为蓝色 */
+}
+
+.category-btn.active,
+.category-btn:hover {
+    background: #4a90e2; /* 类别按钮激活/悬停时背景恢复为蓝色 */
+    color: white; /* 按钮激活/悬停时文字颜色恢复为白色 */
 }
 
 .publication-categories {
@@ -513,9 +636,9 @@ section {
 
 .category-btn {
     padding: 10px 25px;
-    border: 2px solid #4a90e2;
+    border: 2px solid #87ceeb; /* publications 类别按钮边框颜色调整 */
     background: transparent;
-    color: #4a90e2;
+    color: #87ceeb; /* publications 类别按钮文字颜色调整 */
     border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -524,8 +647,8 @@ section {
 
 .category-btn.active,
 .category-btn:hover {
-    background: #4a90e2;
-    color: white;
+    background: #87ceeb;
+    color: #2c3e50; /* publications 类别按钮激活/悬停时背景和文字颜色调整 */
 }
 
 .publications-list {
@@ -551,7 +674,7 @@ section {
 .pub-year {
     font-size: 1.2rem;
     font-weight: 700;
-    color: #4a90e2;
+    color: #87ceeb; /* publications 年份颜色调整 */
     min-width: 80px;
     margin-right: 25px;
 }
@@ -559,23 +682,58 @@ section {
 .pub-content h4 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #2c3e50;
+    color: white; /* publications 标题颜色调整 */
     margin-bottom: 10px;
 }
 
 .pub-authors {
-    color: #666;
+    color: #f0f0f0; /* publications 作者文本颜色调整 */
     margin-bottom: 5px;
 }
 
 .pub-journal {
-    color: #888;
+    color: #f0f0f0; /* publications 期刊文本颜色调整 */
     font-style: italic;
 }
 
 /* 联系我们 */
 .contact {
-    background: #f8f9fa;
+    background: transparent;
+    color: white; /* 确保文本在视频上可见 */
+}
+
+.contact .section-title,
+.contact .contact-details h4 {
+    color: white; /* 调整标题颜色 */
+}
+
+.contact .contact-details p {
+    color: #f0f0f0; /* 调整段落文本颜色 */
+}
+
+.contact-form {
+    background: rgba(255, 255, 255, 0.1); /* 表单半透明背景 */
+}
+
+.contact-form input,
+.contact-form textarea {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white; /* 输入文字颜色 */
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #ccc; /* 占位符文字颜色 */
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #87ceeb;
+}
+
+.contact-icon {
+    background: #87ceeb;
 }
 
 .contact-content {
@@ -594,12 +752,12 @@ section {
 .contact-icon {
     width: 50px;
     height: 50px;
-    background: #4a90e2;
+    background: #87ceeb; /* contact icon 背景颜色调整 */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #2c3e50; /* contact icon 内部图标颜色调整 */
     font-size: 1.2rem;
     flex-shrink: 0;
 }
@@ -607,12 +765,12 @@ section {
 .contact-details h4 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #2c3e50;
+    color: white; /* contact details 标题颜色调整 */
     margin-bottom: 5px;
 }
 
 .contact-details p {
-    color: #666;
+    color: #f0f0f0; /* contact details 段落文本颜色调整 */
     line-height: 1.6;
 }
 
@@ -641,7 +799,7 @@ section {
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #4a90e2;
+    border-color: #87ceeb; /* contact form focus 边框颜色调整 */
 }
 
 .form-group textarea {
@@ -651,7 +809,7 @@ section {
 
 /* 页脚 */
 .footer {
-    background: #2c3e50;
+    background: rgba(44, 62, 80, 0.8); /* 页脚半透明深色背景 */
     color: white;
     padding: 50px 0 20px;
 }
@@ -667,7 +825,7 @@ section {
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 20px;
-    color: #4a90e2;
+    color: #87ceeb; /* footer section 标题颜色调整 */
 }
 
 .footer-section ul {
@@ -679,17 +837,17 @@ section {
 }
 
 .footer-section ul li a {
-    color: #bbb;
+    color: #ccc; /* footer link 颜色调整 */
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .footer-section ul li a:hover {
-    color: #4a90e2;
+    color: #87ceeb; /* footer link hover 颜色调整 */
 }
 
 .footer-section p {
-    color: #bbb;
+    color: #ccc; /* footer 段落文本颜色调整 */
     line-height: 1.6;
     margin-bottom: 10px;
 }
@@ -697,8 +855,8 @@ section {
 .footer-bottom {
     text-align: center;
     padding-top: 20px;
-    border-top: 1px solid #34495e;
-    color: #bbb;
+    border-top: 1px solid #566573; /* footer bottom border 颜色调整 */
+    color: #ccc; /* footer bottom 文本颜色调整 */
 }
 
 /* 响应式设计 */
